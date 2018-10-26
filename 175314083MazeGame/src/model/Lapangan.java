@@ -5,10 +5,13 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author user only
  */
 public class Lapangan {
+    private ArrayList<SelLapangan> isiLapangan = new ArrayList<SelLapangan>();
     
 }
