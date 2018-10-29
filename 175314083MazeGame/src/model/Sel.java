@@ -9,15 +9,15 @@ package model;
  *
  * @author user only
  */
-public class SelLapangan {
+public class Sel {
     private int posisiX;
     private int posisiY;
     private char nilai;
 
-    public SelLapangan() {
+    public Sel() {
     }
 
-    public SelLapangan(int posisiX, int posisiY, char nilai) {
+    public Sel(int posisiX, int posisiY, char nilai) {
         this.posisiX = posisiX;
         this.posisiY = posisiY;
         this.nilai = nilai;
@@ -26,4 +26,20 @@ public class SelLapangan {
     public String toString(){
         return posisiX+","+posisiY+","+nilai;
     }
+    
+    public boolean isPemain(){
+        if (nilai == '@') {
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean isHAmbatan(){
+        if (nilai == '#') {
+            return true;
+        }
+        return false;
+    }
+    
+    
 }

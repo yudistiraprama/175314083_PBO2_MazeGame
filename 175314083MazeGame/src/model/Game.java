@@ -5,13 +5,12 @@
  */
 package model;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author user only
+ * @author Asus
  */
-public class Lapangan {
-    private ArrayList<SelLapangan> isiLapangan = new ArrayList<SelLapangan>();
+public class Game {
     
+    private String nama = "Maze";
+    private Tempat lokasi;
 }
