@@ -16,7 +16,7 @@ public class Tempat {
 
     private int tinggi;
     private int lebar;
-    private ArrayList<Sel> isi = new ArrayList<Sel>();
+    private ArrayList<Sel> isiTempat = new ArrayList<Sel>();
 
     public void bacaConfigurasi(File file) {
 
@@ -27,9 +27,9 @@ public class Tempat {
     }
 
     private Sel cariPemain() {
-        for (int i = 0; i < isi.size(); i++) {
-            if (isi.get(i).isPemain()) {
-                return isi.get(i);
+        for (int i = 0; i < isiTempat.size(); i++) {
+            if (isiTempat.get(i).isPemain()) {
+                return isiTempat.get(i);
             }
         }
         return null;
