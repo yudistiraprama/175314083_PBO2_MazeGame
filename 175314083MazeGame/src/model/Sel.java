@@ -10,6 +10,7 @@ package model;
  * @author user only
  */
 public class Sel {
+
     private int posisiX;
     private int posisiY;
     private char nilai;
@@ -22,24 +23,41 @@ public class Sel {
         this.posisiY = posisiY;
         this.nilai = nilai;
     }
-    
-    public String toString(){
-        return posisiX+","+posisiY+","+nilai;
+
+    public int getPosisiX() {
+        return posisiX;
     }
-    
-    public boolean isPemain(){
-        if (nilai == '@') {
-            return true;
-        }
-        return false;
+
+    public void setPosisiX(int posisiX) {
+        this.posisiX = posisiX;
     }
-    
-    public boolean isHAmbatan(){
-        if (nilai == '#') {
-            return true;
-        }
-        return false;
+
+    public int getPosisiY() {
+        return posisiY;
     }
-    
-    
+
+    public void setPosisiY(int posisiY) {
+        this.posisiY = posisiY;
+    }
+
+    public char getNilai() {
+        return nilai;
+    }
+
+    public void setNilai(char nilai) {
+        this.nilai = nilai;
+    }
+
+    @Override
+    public String toString() {
+        return posisiX + "," + posisiY + "," + nilai;
+    }
+
+    public boolean isPemain() {
+        return nilai == '@';
+    }
+
+    public boolean isHambatan() {
+        return nilai == '#';
+    }
 }
