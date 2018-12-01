@@ -6,6 +6,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -33,13 +34,15 @@ public class GameFrame extends JFrame {
 
     private JLabel perintahlabel;
     private JTextField perintahText;
-    private JButton okButton;
+    private JButton pindahKananButton;
+    private JButton pindahKiriButton;
+    private JButton tambahButton;
+    private JButton hapusButton;
 
     private JMenuBar menuBar;
     private JMenu gameMenu;
     private JMenuItem exitMenuItem;
     private JMenuItem bacaKonfigurasiMenuItem;
-    private JMenuItem SimpanKonfigurasiMenuItem;
 
     public GameFrame(String title) {
         this.setTitle(title);
@@ -54,7 +57,7 @@ public class GameFrame extends JFrame {
 
     public void init() {
         // set ukuran dan layout
-        this.setSize(500, 300);
+        this.setSize(800, 500);
         this.setLayout(new BorderLayout());
 
         // set menu Bar
@@ -62,17 +65,14 @@ public class GameFrame extends JFrame {
         gameMenu = new JMenu("Game");
         exitMenuItem = new JMenuItem("Keluar");
         bacaKonfigurasiMenuItem = new JMenuItem("Baca");
-        SimpanKonfigurasiMenuItem = new JMenuItem("Simpan");
         gameMenu.add(bacaKonfigurasiMenuItem);
-        gameMenu.add(SimpanKonfigurasiMenuItem);
         gameMenu.add(exitMenuItem);
         menuBar.add(gameMenu);
         setJMenuBar(menuBar);
 
-        //action perfom for bacaKonfigurasiMenuItem
         bacaKonfigurasiMenuItem.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent ae) {
                 JFileChooser jf = new JFileChooser();
                 int returnVal = jf.showOpenDialog(null);
                 Tempat tempat = new Tempat();
@@ -85,13 +85,6 @@ public class GameFrame extends JFrame {
                 tempatPanel = new TempatPanel();
                 tempatPanel.setTempat(tempat);
                 init();
-            }
-        }
-        );
-
-        SimpanKonfigurasiMenuItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
             }
         }
         );
@@ -121,28 +114,57 @@ public class GameFrame extends JFrame {
 
         southPanel.add(perintahText);
 
-        this.okButton = new JButton("OK");
+        this.pindahKananButton = new JButton("Kanan");
 
-        southPanel.add(okButton);
+        southPanel.add(pindahKananButton);
 
-        okButton.addActionListener(
+        pindahKananButton.addActionListener(
                 new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e
             ) {
-                if ("L".equalsIgnoreCase(perintahText.getText())) {
-                    pindahKiri();
-                } else if ("R".equalsIgnoreCase(perintahText.getText())) {
-                    pindahKanan();
-                } else if ("U".equalsIgnoreCase(perintahText.getText())) {
-                    pindahAtas();
-                } else if ("D".equalsIgnoreCase(perintahText.getText())) {
-                    pindahBawah();
-                }
+                pindahKanan();
             }
         }
         );
 
+        this.pindahKiriButton = new JButton("Kiri");
+
+        southPanel.add(pindahKiriButton);
+        pindahKiriButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                pindahKiri();
+            }
+        });
+
+        this.tambahButton = new JButton("tambahBola");
+
+        southPanel.add(tambahButton);
+
+        tambahButton.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                tambahBola();
+            }
+        }
+        );
+
+        this.hapusButton = new JButton("hapusBola");
+
+        southPanel.add(hapusButton);
+
+        hapusButton.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e
+            ) {
+                hapusBola();
+            }
+        }
+        );
         // set contentPane
         Container cp = this.getContentPane();
         if (tempatPanel
@@ -158,6 +180,29 @@ public class GameFrame extends JFrame {
     }
 
     /**
+     * Fungsi untuk tambahBola
+     */
+    public void tambahBola() {
+        tempatPanel.getTempat().tambahSel(new Sel(0, 0, 50, 50, '@', Color.BLUE));
+        // gambar ulang tempat Panel
+        getTempatPanel().repaint();
+    }
+
+    /**
+     * Fungsi hapus bola
+     */
+    public void hapusBola() {
+        for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
+            if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@') {
+                tempatPanel.getTempat().hapusSel(getTempatPanel().getTempat().getDaftarSel().get(i));
+                // gambar ulang tempat Panel
+                getTempatPanel().repaint();
+                break;
+            }
+        }
+    }
+
+    /**
      * Fungsi untuk memindahkan sel dan menggambar ulang
      */
     public void pindahKanan() {
@@ -165,7 +210,7 @@ public class GameFrame extends JFrame {
         // sehingga sel akan terlihat bergerak ke kanan
         for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             // set posisiX yang baru
-            if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@') {
+            if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@'&& getTempatPanel().getTempat().getDaftarSel().get(i+1).getNilai() != '#') {
                 getTempatPanel().getTempat().getDaftarSel().get(i).geserKanan();
             }
         }
@@ -178,7 +223,7 @@ public class GameFrame extends JFrame {
         // sehingga sel akan terlihat bergerak ke kiri
         for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             // set posisiX yang baru
-            if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@') {
+            if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@'&& getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() != '#') {
                 getTempatPanel().getTempat().getDaftarSel().get(i).geserKiri();
             }
         }

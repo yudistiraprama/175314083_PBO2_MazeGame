@@ -132,6 +132,12 @@ public class Tempat {
     public void tambahSel(Sel sel) {
         daftarSel.add(sel);
     }
+    
+    public void hapusSel(Sel sel){
+        if (!daftarSel.isEmpty()) {
+            daftarSel.remove(sel);
+        }
+    }
 
     /**
      * @return the tinggi
