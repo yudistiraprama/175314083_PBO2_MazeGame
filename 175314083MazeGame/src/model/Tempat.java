@@ -59,8 +59,8 @@ public class Tempat {
             int dataInt;
             int baris = 0;
             int kolom = 0;
-            int t = 50;
-            int l = 50;
+            int t = 40;
+            int l = 40;
 
             while ((dataInt = fis.read()) != -1) {
                 if ((char) dataInt != '\n') {
@@ -68,7 +68,7 @@ public class Tempat {
                         hasilBaca = hasilBaca + (char) dataInt;
                         Sel sel = new Sel();
                         sel.setNilai((char) dataInt);
-                        sel.setWarna(Color.white);
+                        sel.setWarna(Color.red);
                         sel.setBaris(baris);
                         sel.setKolom(kolom);
                         sel.setTinggi(t);
@@ -79,7 +79,7 @@ public class Tempat {
                         hasilBaca = hasilBaca + (char) dataInt;
                         Sel sel = new Sel();
                         sel.setNilai((char) dataInt);
-                        sel.setWarna(Color.red);
+                        sel.setWarna(Color.green);
                         sel.setBaris(baris);
                         sel.setKolom(kolom);
                         sel.setTinggi(t);
@@ -101,7 +101,7 @@ public class Tempat {
                         hasilBaca = hasilBaca + (char) dataInt;
                         Sel sel = new Sel();
                         sel.setNilai((char) dataInt);
-                        sel.setWarna(Color.GRAY);
+                        sel.setWarna(Color.yellow);
                         sel.setBaris(baris);
                         sel.setKolom(kolom);
                         sel.setTinggi(t);

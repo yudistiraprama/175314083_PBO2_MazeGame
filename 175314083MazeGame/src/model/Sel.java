@@ -98,36 +98,36 @@ public class Sel {
     /**
      * Fungsi untuk menggeser sel ke kanan
      */
-    public void geserKanan() {
+    public void geserKanan(int x) {
         if (isBatasKanan() == false) {
-            kolom++;
+            this.setKolom(kolom += x);
         }
     }
 
     /**
      * Fungsi untuk menggeser sel ke kiri
      */
-    public void geserKiri() {
+    public void geserKiri(int x) {
         if (isBatasKiri() == false) {
-            kolom--;
+            this.setKolom(kolom -= x);
         }
     }
 
     /**
      * Fungsi untuk menggeser sel ke atas
      */
-    public void geserAtas() {
+    public void geserAtas(int x) {
         if (isBatasAtas() == false) {
-            baris--;
+            this.setBaris(baris -= x);
         }
     }
 
     /**
      * Fungsi untuk menggeser sel ke bawah
      */
-    public void geserBawah() {
+    public void geserBawah(int x) {
         if (isBatasBawah() == false) {
-            baris++;
+            this.setBaris(baris += x);
         }
     }
 
