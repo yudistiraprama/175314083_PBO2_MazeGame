@@ -30,6 +30,8 @@ import model.Tempat;
  */
 public class GameFrame extends JFrame {
 
+    Tempat tempat = new Tempat();
+
     private TempatPanel tempatPanel;
 
     private JLabel perintahlabel;
@@ -79,33 +81,33 @@ public class GameFrame extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 JFileChooser jf = new JFileChooser();
                 int returnVal = jf.showOpenDialog(null);
-                Tempat tempat = new Tempat();
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     tempat.bacaKonfigurasi(jf.getSelectedFile());
+                    Tempat.batasKanan = 500;
+                    Tempat.batasBawah = 500;
+                    tempatPanel = new TempatPanel();
+                    tempatPanel.setTempat(tempat);
                 }
-                Tempat.batasKanan = 500;
-                Tempat.batasBawah = 500;
-                // buat tempatPanel dan tambahkan tempat ke tempatPanel
-                tempatPanel = new TempatPanel();
-                tempatPanel.setTempat(tempat);
                 init();
             }
         }
         );
 
-        simpanKonfigurasiMenuItem.addActionListener(new ActionListener() {
+        simpanKonfigurasiMenuItem.addActionListener(
+                new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent ae
+            ) {
                 JFileChooser fc = new JFileChooser();
                 fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 int returnVal = fc.showSaveDialog(null);
-                Tempat tempat = new Tempat();
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     tempat.setIsi(getTempatPanel().getTempat().getIsi());
                     tempat.simpanKonfigurasi(fc.getSelectedFile());
                 }
             }
-        });
+        }
+        );
 
         //action perform for exitMenuItem
         exitMenuItem.addActionListener(
@@ -214,9 +216,7 @@ public class GameFrame extends JFrame {
         );
 
 //        this.tambahButton = new JButton("tambahBola");
-//
 //        southPanel.add(tambahButton);
-//
 //        tambahButton.addActionListener(
 //                new ActionListener() {
 //            @Override
@@ -228,9 +228,7 @@ public class GameFrame extends JFrame {
 //        );
 //
 //        this.hapusButton = new JButton("hapusBola");
-//
 //        southPanel.add(hapusButton);
-//
 //        hapusButton.addActionListener(
 //                new ActionListener() {
 //            @Override
@@ -279,6 +277,7 @@ public class GameFrame extends JFrame {
 
     /**
      * Fungsi untuk memindahkan sel dan menggambar ulang
+     *
      * @param x
      */
     public void pindahKanan(int x) {
@@ -291,12 +290,7 @@ public class GameFrame extends JFrame {
                 getTempatPanel().getTempat().getDaftarSel().get(i + x).geserKiri(x);
             }
         }
-        // gambar ulang tempat Panel
         getTempatPanel().repaint();
-        Tempat tmp = new Tempat();
-        tmp.setDaftarSel(getTempatPanel().getTempat().getDaftarSel());
-        tmp.setIsi(getTempatPanel().getTempat().getIsi());
-        tempatPanel.setTempat(tmp);
     }
 
     public void pindahKiri(int x) {
@@ -305,16 +299,14 @@ public class GameFrame extends JFrame {
         for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             // set posisiX yang baru
             if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@') {
-                getTempatPanel().getTempat().getDaftarSel().get(i).geserKiri(x);
                 getTempatPanel().getTempat().getDaftarSel().get(i - x).geserKanan(x);
+                getTempatPanel().getTempat().getDaftarSel().get(i).geserKiri(x);
+                
             }
         }
         // gambar ulang tempat Panel
         getTempatPanel().repaint();
-        Tempat tmp = new Tempat();
-        tmp.setDaftarSel(getTempatPanel().getTempat().getDaftarSel());
-        tmp.setIsi(getTempatPanel().getTempat().getIsi());
-        tempatPanel.setTempat(tmp);
+
     }
 
     public void pindahAtas(int x) {
@@ -329,10 +321,6 @@ public class GameFrame extends JFrame {
         }
         // gambar ulang tempat Panel
         getTempatPanel().repaint();
-        Tempat tmp = new Tempat();
-        tmp.setDaftarSel(getTempatPanel().getTempat().getDaftarSel());
-        tmp.setIsi(getTempatPanel().getTempat().getIsi());
-        tempatPanel.setTempat(tmp);
     }
 
     public void pindahBawah(int x) {
@@ -341,16 +329,16 @@ public class GameFrame extends JFrame {
         for (int i = 0; i < getTempatPanel().getTempat().getDaftarSel().size(); i++) {
             // set posisiX yang baru
             if (getTempatPanel().getTempat().getDaftarSel().get(i).getNilai() == '@') {
-                getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah(x);
                 getTempatPanel().getTempat().getDaftarSel().get(i + 8 * x).geserAtas(x);
+                getTempatPanel().getTempat().getDaftarSel().get(i).geserBawah(x);    
             }
         }
         // gambar ulang tempat Panel
         getTempatPanel().repaint();
-        Tempat tmp = new Tempat();
-        tmp.setDaftarSel(getTempatPanel().getTempat().getDaftarSel());
-        tmp.setIsi(getTempatPanel().getTempat().getIsi());
-        tempatPanel.setTempat(tmp);
+//        Tempat tmp = new Tempat();
+//        tmp.setDaftarSel(getTempatPanel().getTempat().getDaftarSel());
+//        tmp.setIsi(getTempatPanel().getTempat().getIsi());
+//        tempatPanel.setTempat(tmp);
     }
 
     /**

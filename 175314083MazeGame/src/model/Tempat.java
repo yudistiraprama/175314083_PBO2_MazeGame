@@ -138,6 +138,8 @@ public class Tempat {
             daftarSel.remove(sel);
         }
     }
+    
+
 
     /**
      * @return the tinggi

@@ -100,7 +100,10 @@ public class Sel {
      */
     public void geserKanan(int x) {
         if (isBatasKanan() == false) {
-            this.setKolom(kolom += x);
+            int nx = this.getKolom() + x;
+            int ny = this.getBaris();
+            this.setKolom(nx);
+            this.setBaris(ny);
         }
     }
 
@@ -109,7 +112,10 @@ public class Sel {
      */
     public void geserKiri(int x) {
         if (isBatasKiri() == false) {
-            this.setKolom(kolom -= x);
+            int nx = this.getKolom() - x;
+            int ny = this.getBaris();
+            this.setKolom(nx);
+            this.setBaris(ny);
         }
     }
 
@@ -118,7 +124,10 @@ public class Sel {
      */
     public void geserAtas(int x) {
         if (isBatasAtas() == false) {
-            this.setBaris(baris -= x);
+            int nx = this.getKolom();
+            int ny = this.getBaris() - x;
+            this.setKolom(nx);
+            this.setBaris(ny);
         }
     }
 
@@ -127,7 +136,10 @@ public class Sel {
      */
     public void geserBawah(int x) {
         if (isBatasBawah() == false) {
-            this.setBaris(baris += x);
+            int nx = this.getKolom();
+            int ny = this.getBaris() + x;
+            this.setKolom(nx);
+            this.setBaris(ny);
         }
     }
 
