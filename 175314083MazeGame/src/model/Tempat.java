@@ -79,7 +79,7 @@ public class Tempat {
                         hasilBaca = hasilBaca + (char) dataInt;
                         Sel sel = new Sel();
                         sel.setNilai((char) dataInt);
-                        sel.setWarna(Color.green);
+                        sel.setWarna(Color.white);
                         sel.setBaris(baris);
                         sel.setKolom(kolom);
                         sel.setTinggi(t);
